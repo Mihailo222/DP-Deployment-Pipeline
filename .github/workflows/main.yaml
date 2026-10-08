@@ -12,4 +12,4 @@ jobs:
       os: linux
       distribution: ubuntu
     secrets:
-      CHECKOUT_GHE_PAT: ${{ secrets.CHECKOUT_GHE_PAT }} #trigger ppl
+      CHECKOUT_GHE_PAT: ${{ secrets.CHECKOUT_GHE_PAT }} #trigger pipeline
