@@ -1,0 +1,15 @@
+name: Install Docker
+on: 
+  push:
+    branches: 
+      - main
+  workflow_dispatch:
+
+jobs:
+  install-docker:
+    uses: GHActions-Reusable-Workflows/.github/workflows/install-docker.yaml@main
+    with:
+      os: linux
+      distribution: ubuntu
+    secrets:
+      CHECKOUT_GHE_PAT: ${{ secrets.CHECKOUT_GHE_PAT }}
