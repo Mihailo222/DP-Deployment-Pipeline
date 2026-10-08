@@ -7,7 +7,7 @@ on:
 
 jobs:
   install-docker:
-    uses: GHActions-Reusable-Workflows/.github/workflows/install-docker.yaml@main
+    uses: Mihailo222/GHActions-Reusable-Workflows/.github/workflows/install-docker.yaml@main
     with:
       os: linux
       distribution: ubuntu
