@@ -48,5 +48,5 @@ jobs:
     
     - name: Clean up workspace.
       run: |
-        rm -rf ${{ github.workspace }}
+        rm -rf ${{ github.workspace }}/
         
