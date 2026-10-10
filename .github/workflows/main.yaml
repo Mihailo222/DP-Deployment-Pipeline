@@ -25,6 +25,7 @@ jobs:
         repository: 'Mihailo222/DP-client-react'
         ref: 'main'
         fetch-depth: 0 # this checks out the whole history, generally only the last commit is fetched
+        path: FRONT
         token: ${{ secrets.CHECKOUT_GHE_PAT }}
 
     - name: Check out go api.
@@ -33,6 +34,7 @@ jobs:
         repository: 'Mihailo222/DP-go-api'
         ref: 'main'
         fetch-depth: 0 # this checks out the whole history, generally only the last commit is fetched
+        path: API_GO
         token: ${{ secrets.CHECKOUT_GHE_PAT }}
 
     - name: Check out node api.
@@ -41,4 +43,5 @@ jobs:
         repository: 'Mihailo222/DP-node-api'
         ref: 'main'
         fetch-depth: 0 # this checks out the whole history, generally only the last commit is fetched
+        path: NODE_API
         token: ${{ secrets.CHECKOUT_GHE_PAT }}
