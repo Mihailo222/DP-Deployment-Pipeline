@@ -19,10 +19,26 @@ jobs:
     runs-on: ['dp-runner', 'dp-ci', 'self-hosted']   
     
     steps: 
-    - uses: actions/checkout@v7
+    - name: Check out frontend
+      uses: actions/checkout@v7
       with:
         repository: 'Mihailo222/DP-client-react'
         ref: 'main'
         fetch-depth: 0 # this checks out the whole history, generally only the last commit is fetched
         token: ${{ secrets.CHECKOUT_GHE_PAT }}
 
+    - name: Check out go api.
+      uses: actions/checkout@v7
+      with:
+        repository: 'Mihailo222/DP-go-api'
+        ref: 'main'
+        fetch-depth: 0 # this checks out the whole history, generally only the last commit is fetched
+        token: ${{ secrets.CHECKOUT_GHE_PAT }}
+
+    - name: Check out node api.
+      uses: actions/checkout@v7
+      with:
+        repository: 'Mihailo222/DP-node-api'
+        ref: 'main'
+        fetch-depth: 0 # this checks out the whole history, generally only the last commit is fetched
+        token: ${{ secrets.CHECKOUT_GHE_PAT }}
