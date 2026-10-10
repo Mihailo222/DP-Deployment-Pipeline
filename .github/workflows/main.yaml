@@ -55,6 +55,23 @@ jobs:
         path: DEPLOY_WORKSPACE
         token: ${{ secrets.CHECKOUT_GHE_PAT }}
     
+    - name: Edit docker compose file.
+      run: |
+        sed -i 's|FRONTEND_CONTEXT_DIR|../FRONT/|g' ./DEPLOY_WORKSPACE/docker-compose.yaml
+
+        sed -i 's|FRONTEND_DOCKERFILE_PATH|../FRONT/Dockerfiles/Dockerfile_dev|g' ./DEPLOY_WORKSPACE/docker-compose.yaml
+
+        sed -i 's|NGINX_CONTEXT_DIR|../FRONT|g' ./DEPLOY_WORKSPACE/docker-compose.yaml
+
+        sed -i 's|NGINX_DOCKERFILE_PATH|../FRONT/Dockerfiles/Dockerfile_nginx|g' ./DEPLOY_WORKSPACE/docker-compose.yaml
+
+        sed -i 's|API_NODE_CONTEXT_DIR|../NODE_API/|g' ./DEPLOY_WORKSPACE/docker-compose.yaml
+
+        sed -i 's|API_NODE_DOCKERFILE_PATH|../NODE_API/Dockerfile|g' ./DEPLOY_WORKSPACE/docker-compose.yaml
+
+        sed -i 's|API_GOLANG_CONTEXT_DIR|../API_GO/|g' ./DEPLOY_WORKSPACE/docker-compose.yaml
+
+        sed -i 's|API_GOLANG_DOCKERFILE_PATH|../API_GO/Dockerfile|g' ./DEPLOY_WORKSPACE/docker-compose.yaml
 #    - name: Clean up workspace without destroying directory. 
 #      run: |
 #        rm -rf ${{ github.workspace }}/*
