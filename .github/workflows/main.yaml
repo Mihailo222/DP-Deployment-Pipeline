@@ -46,6 +46,6 @@ jobs:
         path: NODE_API
         token: ${{ secrets.CHECKOUT_GHE_PAT }}
     
-    - name: Clean up workspace without destroying directory. 
-      run: |
-        rm -rf ${{ github.workspace }}/*
+  #  - name: Clean up workspace without destroying directory. 
+  #    run: |
+  #      rm -rf ${{ github.workspace }}/*
