@@ -6,10 +6,23 @@ on:
   workflow_dispatch:
 
 jobs:
-  install-docker:
-    uses: Mihailo222/GHActions-Reusable-Workflows/.github/workflows/install-docker.yaml@main
-    with:
-      os: linux
-      distribution: ubuntu
-    secrets:
-      CHECKOUT_GHE_PAT: ${{ secrets.CHECKOUT_GHE_PAT }} #trigger pipeline
+ # install-docker:
+ #   uses: Mihailo222/GHActions-Reusable-Workflows/.github/workflows/install-docker.yaml@main
+ #   with:
+ #     os: linux
+ #     distribution: ubuntu
+ #   secrets:
+ #     CHECKOUT_GHE_PAT: ${{ secrets.CHECKOUT_GHE_PAT }} #trigger pipeline
+ 
+  checkout-repos: 
+  
+    runs-on: ['dp-runner', 'dp-ci', 'self-hosted']   
+    
+    steps: 
+    - uses: actions/checkout@v7
+      with:
+        repository: 'DP-client-react'
+        ref: 'main'
+        fetch-depth: 0 # this checks out the whole history, generally only the last commit is fetched
+        token: ${{ secrets.CHECKOUT_GHE_PAT }}
+
