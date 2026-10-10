@@ -1,12 +1,18 @@
+# volume for /usr/src/app/node_modules je ovde jer ne zelim da se oni kopiraju sa mog dev environmenta ???
+
 services:
   client-react-vite:
     image: client-react-vite
     build:
-      context: /Users/mihailomahovac/Desktop/Docker-FullCourse/devops-directive-docker-course/05-example-web-application/client-react
-      dockerfile: /Users/mihailomahovac/Desktop/Docker-FullCourse/devops-directive-docker-course/06-building-container-images/client-react/Dockerfile.3
+      context: FRONTEND_CONTEXT_DIR
+      dockerfile: FRONTEND_DOCKERFILE_PATH
     init: true
     volumes:
-      - /Users/mihailomahovac/Desktop/Docker-FullCourse/devops-directive-docker-course/05-example-web-application/client-react/vite.config.js:/usr/src/app/vite.config.js
+      - type: bind
+        source: FRONTEND_CONTEXT_DIR
+        target: /usr/src/app/ 
+      - type: volume # this is volume without source, so on target location is empty folder that's going to be populated after npm build etc
+        target: /usr/src/app/node_modules
     networks:
       - frontend
     ports:
@@ -17,8 +23,14 @@ services:
       shipyard.route: '/'
     image: client-react-nginx
     build:
-      context: /Users/mihailomahovac/Desktop/Docker-FullCourse/devops-directive-docker-course/05-example-web-application/client-react
-      dockerfile: /Users/mihailomahovac/Desktop/Docker-FullCourse/devops-directive-docker-course/06-building-container-images/client-react/Dockerfile.5
+      context: NGINX_CONTEXT_DIR
+      dockerfile: NGINX_DOCKERFILE_PATH
+    volumes:
+      - type: bind
+        source: NGINX_CONTEXT_DIR
+        target: /usr/src/app/
+      - type: volume
+        target: /usr/src/app/node_modules
     init: true
     networks:
       - frontend
@@ -31,8 +43,9 @@ services:
       shipyard.route.rewrite: true
     image: api-node
     build:
-      context: /Users/mihailomahovac/Desktop/Docker-FullCourse/devops-directive-docker-course/05-example-web-application/api-node/
-      dockerfile: /Users/mihailomahovac/Desktop/Docker-FullCourse/devops-directive-docker-course/06-building-container-images/api-node/Dockerfile.7
+      context: API_NODE_CONTEXT_DIR
+      dockerfile: API_NODE_DOCKERFILE_PATH
+      target: dev
     init: true
     depends_on:
       - db
@@ -50,8 +63,13 @@ services:
       shipyard.route.rewrite: true
     image: api-golang
     build:
-      context: /Users/mihailomahovac/Desktop/Docker-FullCourse/devops-directive-docker-course/05-example-web-application/api-golang/
-      dockerfile: /Users/mihailomahovac/Desktop/Docker-FullCourse/devops-directive-docker-course/06-building-container-images/api-golang/Dockerfile.6
+      context: API_GOLANG_CONTEXT_DIR
+      dockerfile: API_GOLANG_DOCKERFILE_PATH
+      target: dev
+    volumes:
+      - type: bind
+        source: API_GOLANG_CONTEXT_DIR
+        target: /usr/src/app/    
     init: true
     depends_on:
       - db
@@ -78,3 +96,4 @@ volumes:
 networks:
   frontend:
   backend:
+
