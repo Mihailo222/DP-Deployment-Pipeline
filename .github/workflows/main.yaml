@@ -76,7 +76,7 @@ jobs:
     - name: Docker compose up.
       run: |   
         whoami
-        sudo docker compose -f ./DEPLOY_WORKSPACE/docker-compose.yaml up
+        sudo docker compose -f ./DEPLOY_WORKSPACE/docker-compose.yaml up -d
         
 #    - name: Clean up workspace without destroying directory. 
 #      run: |
