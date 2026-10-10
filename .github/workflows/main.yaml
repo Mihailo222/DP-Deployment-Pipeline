@@ -21,7 +21,7 @@ jobs:
     steps: 
     - uses: actions/checkout@v7
       with:
-        repository: 'DP-client-react'
+        repository: 'Mihailo222/DP-client-react'
         ref: 'main'
         fetch-depth: 0 # this checks out the whole history, generally only the last commit is fetched
         token: ${{ secrets.CHECKOUT_GHE_PAT }}
