@@ -72,6 +72,11 @@ jobs:
         sed -i 's|API_GOLANG_CONTEXT_DIR|../API_GO/|g' ./DEPLOY_WORKSPACE/docker-compose.yaml
 
         sed -i 's|API_GOLANG_DOCKERFILE_PATH|../API_GO/Dockerfile|g' ./DEPLOY_WORKSPACE/docker-compose.yaml
+     
+    - name: Docker compose up.
+      run: |
+        docker compose -f ./DEPLOY_WORKSPACE/docker-compose.yaml up
+        
 #    - name: Clean up workspace without destroying directory. 
 #      run: |
 #        rm -rf ${{ github.workspace }}/*
