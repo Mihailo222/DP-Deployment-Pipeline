@@ -52,7 +52,6 @@ jobs:
         repository: 'Mihailo222/DP-Deployment-Pipeline'
         ref: 'main'
         fetch-depth: 0 # this checks out the whole history, generally only the last commit is fetched
-        path: NODE_API
         token: ${{ secrets.CHECKOUT_GHE_PAT }}
     
   #  - name: Clean up workspace without destroying directory. 
